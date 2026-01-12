@@ -2,8 +2,21 @@
 
 A Node.js + Express gallery app where artists upload PNGs, encrypt them client-side, and share them as previewable posts. Visitors can try to decrypt an image with the correct password and download the result.
 
-## Demo video
-- [Demo (starts at 10s)](Video_Gallery_proj.mp4#t=10)
+## Screenshots
+- Gallery feed
+  ![Gallery feed](photos/index.png)
+- Registration
+  ![Registration](photos/registration.png)
+- User page
+  ![User page](photos/user.png)
+- Encrypt and upload flow
+  ![Encrypt upload](photos/encripting.png)
+- Post detail and decrypt UI
+  ![Post detail](photos/post.png)
+- Decryption result
+  ![Decryption result](photos/decripted.png)
+- Wrong password result
+  ![Wrong password](photos/wrong_pass.png)
 
 ## Features
 - User registration and login with session support
@@ -44,6 +57,15 @@ for (let i = encryptStartPixel * 4; i < pixels.length; i += 4) {
     pixels[i + 2] = pixels[i + 2] ^ decryptionKey;
 }
 ```
+
+Why multiply by 4 and step by 4:
+- Canvas image data is stored as a flat RGBA array, where each pixel uses 4 consecutive values: Red, Green, Blue, Alpha.
+- `encryptStart * 4` converts a pixel index into the correct array index.
+- `i += 4` moves to the next pixel while keeping channels aligned.
+
+What `encryptionKey` is:
+- `encryptionKey` is a single byte (0-255) derived from the user password via a simple hash.
+- The key is XORed with each RGB channel (Alpha stays unchanged) to scramble and later recover the pixel data.
 
 ## Getting started
 1. Install dependencies:
