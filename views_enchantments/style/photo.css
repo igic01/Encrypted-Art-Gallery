@@ -1,57 +1,78 @@
 #photo {
-    width: 640px;
-    margin: auto;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
 }
 
-#photo>.container>header {
-    height: 100%;
-    width: 640px;
+#photo > .container {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 24px;
+    padding: 24px;
+    border-radius: 20px;
+    animation: fadeUp 0.7s ease both;
 }
 
-#photo>.container>header>img {
-    height: 100%;
+#photo > .container > header {
     width: 100%;
 }
 
-#photo>.container>.info {
-    padding: 10px;
+#photo > .container > header > img {
+    width: 100%;
+    border-radius: 16px;
+    border: 1px solid var(--line);
 }
 
-#photo>.container>.info>h1 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
-}
-
-#photo>.container>.info>p {
-    font-size: 1em;
-}
-
-#photo>.container>.decryption {
-    margin-top: 20px;
+#photo > .container > .info {
+    padding: 0;
     display: flex;
+    flex-direction: column;
     gap: 10px;
-    padding: 10px;
+}
+
+#photo > .container > .info > h1 {
+    font-size: 2rem;
+    margin-bottom: 4px;
+}
+
+#photo > .container > .info > p {
+    font-size: 1rem;
+    color: var(--muted);
+}
+
+#photo > .container > .decryption {
+    margin-top: 8px;
+    display: flex;
+    gap: 12px;
+    padding: 0;
     flex-direction: column;
 }
 
-#photo>.container>.decryption>label {
+#photo > .container > .decryption > label {
     width: 100%;
     display: flex;
-    align-items: center;
-    gap: 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
 }
 
-#photo>.container>.decryption>label>input {
-    padding: 8px 10px;
+#photo > .container > .decryption > label > input {
+    width: 100%;
 }
 
-#photo>.container>.decryption>button {
-    padding: 8px 10px;
-    border: 0;
+#photo > .container > .decryption > button {
+    padding: 10px 12px;
 }
 
-#photo>.container>.decryption>canvas {
-    border: 1px solid black;
-    margin: 10px 0;
-    margin: -10px;
+#photo > .container > .decryption > canvas {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    margin-top: 6px;
+    background: var(--bg-soft);
+}
+
+@media (max-width: 900px) {
+    #photo > .container {
+        grid-template-columns: 1fr;
+    }
 }

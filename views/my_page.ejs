@@ -12,7 +12,9 @@
 
   <header>
     <span>
-      <h1><%= username %></h1>
+      <h1>
+        <%= username %>
+      </h1>
       <a href="/logout">Log out</a>
     </span>
     <form action="/update_user_info" method="POST">
@@ -22,6 +24,7 @@
   </header>
 
   <section class="glass" id="secion_upload" style="display: none;">
+    <button type="button" id="discardBtn" aria-label="Discard upload">X</button>
     <div class="uploading">
       <h2>Upload and Encrypt PNG</h2>
 
@@ -57,26 +60,31 @@
 
   <div id="gallery">
     <p id="add_new_photo">+</p>
-    <% photos.forEach(photo => {%>
-    <a href="/photo/<%= photo %>" ">
-      <img src=" /uploads_dec/<%= photo %>.png" alt="Encrypt photo" width="200" />
-      <form action="/delete_photo" method="POST">
-        <input type="hidden" name="photo_name" value="<%= photo %>">
-        <button type="submit">🚽</button>
-      </form>
-    </a>
-    <% }) %>
+    <% photos.forEach(photo=> {%>
+      <a href="/photo/<%= photo %>" ">
+      <img src=" /uploads_dec/<%=photo %>.png" alt="Encrypt photo" width="200" />
+        <form action="/delete_photo" method="POST">
+          <input type="hidden" name="photo_name" value="<%= photo %>">
+          <button type="submit">🚽</button>
+        </form>
+      </a>
+      <% }) %>
   </div>
 
   <a href="/" id="back">➥</a>
   <script>
-    document.getElementById("add_new_photo").addEventListener("click", function() {
+    document.getElementById("add_new_photo").addEventListener("click", function () {
       const section = document.getElementById("secion_upload");
       if (section.style.display === "none") {
         section.style.display = "flex";
       } else {
         section.style.display = "none";
       }
+    });
+
+    document.getElementById("discardBtn").addEventListener("click", function () {
+      const section = document.getElementById("secion_upload");
+      section.style.display = "none";
     });
   </script>
   <script src="/views_enchantments/script/encrypt.js"></script>

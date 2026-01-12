@@ -1,81 +1,184 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 @import url(index.css);
 @import url(login.css);
 @import url(register.css);
 @import url(my_page.css);
 @import url(photo.css);
 
+:root {
+    --bg: #0b0b0b;
+    --bg-soft: #121212;
+    --fg: #f2f2f2;
+    --muted: #a8a8a8;
+    --line: #2a2a2a;
+    --panel: rgba(255, 255, 255, 0.04);
+    --glow: rgba(255, 255, 255, 0.12);
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial;
+    font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
 }
 
 body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    background:
+        radial-gradient(1200px circle at 10% 10%, rgba(255, 255, 255, 0.08), transparent 55%),
+        radial-gradient(900px circle at 90% 0%, rgba(255, 255, 255, 0.06), transparent 60%),
+        var(--bg);
+    color: var(--fg);
 }
 
 main {
     margin: auto;
 }
 
+a {
+    color: var(--fg);
+    text-decoration: none;
+}
+
+img {
+    display: block;
+}
+
+button,
+input,
+textarea {
+    background: transparent;
+    color: var(--fg);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 10px 12px;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+button {
+    cursor: pointer;
+    background: var(--fg);
+    color: var(--bg);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+input:focus,
+textarea:focus {
+    border-color: var(--fg);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.15);
+}
+
 .error-message {
-    color: red;
-    font-style: italic;
+    color: var(--fg);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--line);
+    padding: 8px 10px;
+    border-radius: 8px;
 }
 
 #gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
 }
 
-#gallery>a {
+#gallery > a {
     height: 300px;
     overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    position: relative;
 }
 
-#gallery>a>img {
+#gallery > a > img {
     height: 100%;
     width: 100%;
     object-fit: cover;
-    transition: all 0.5s ease;
+    transition: transform 0.6s ease, filter 0.6s ease;
 }
 
-#gallery>a>img:hover {
-    transform: scale(1.2);
-    filter: brightness(0.8);
+#gallery > a > img:hover {
+    transform: scale(1.08);
+    filter: brightness(0.85);
 }
 
 .glass {
-    /* From https://css.glass */
-    background: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10.3px);
-    -webkit-backdrop-filter: blur(10.3px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: var(--panel);
+    border: 1px solid var(--line);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(8px);
 }
 
 #back {
     text-decoration: none;
     transform: scaleX(-1);
-    position: absolute;
-    top: 10px;
+    position: fixed;
+    top: 18px;
     left: 20px;
-    font-size: 2.2em;
-    color: black;
+    font-size: 1.8em;
+    color: var(--fg);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 4px 10px;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+#back:hover {
+    transform: scaleX(-1) translateY(-2px);
+    background: rgba(255, 255, 255, 0.14);
 }
 
 #fixed_background {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    inset: 0;
     z-index: -10;
-    font-size: 24em;
+    font-size: clamp(6rem, 20vw, 20rem);
     text-align: center;
     line-height: 100vh;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.04);
+    font-weight: 700;
+    pointer-events: none;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
 }

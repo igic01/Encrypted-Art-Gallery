@@ -90,3 +90,4 @@ for (let i = encryptStartPixel * 4; i < pixels.length; i += 4) {
 ## Notes
 - MongoDB database name: `db_gallery`
 - Default port: `3000`
+
